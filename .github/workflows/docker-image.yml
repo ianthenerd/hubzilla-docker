@@ -17,7 +17,7 @@ jobs:
         echo "::set-output name=full::$(awk -F, '{print $1}' .tags)"
 
     - name: Docker Setup qemu-action
-      uses: docker/setup-qemu-action@v1
+      uses: docker/setup-qemu-action@v2
     - name: Docker Setup Buildx
       uses: docker/setup-buildx-action@v1
     - name: DockerHub Login

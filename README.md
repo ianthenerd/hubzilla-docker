@@ -1,4 +1,4 @@
-[![Docker Image CI](https://github.com/sebt3/hubzilla/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/sebt3/hubzilla/actions)
+[![Docker Image CI](https://github.com/coetzeer/hubzilla/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/coetzeer/hubzilla/actions)
 
 # Hubzilla Docker image
 

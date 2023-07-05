@@ -1,5 +1,5 @@
 FROM alpine:latest as build
-RUN apk add bash curl gd php8.2 php8.2-curl php8.2-gd php8.2-json php8.2-openssl php8.2-xml php8.2-pecl-imagick php8.2-pgsql php8.2-mysqli php8.2-mbstring php8.2-pecl-mcrypt php8.2-zip \
+RUN apk add bash curl gd php82 php82-curl php82-gd php82-json php82-openssl php82-xml php82-pecl-imagick php82-pgsql php82-mysqli php82-mbstring php82-pecl-mcrypt php82-zip \
     && apk add git patch \
     && git clone https://framagit.org/hubzilla/core.git /hubzilla
 WORKDIR /hubzilla

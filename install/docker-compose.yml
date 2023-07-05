@@ -43,7 +43,7 @@ services:
         - traefik.http.routers.redirect.middlewares=redirect-to-https
         - traefik.http.routers.redirect.entrypoints=web
   hubzilla:
-    image: ungodlyfaded/hubzilla-docker:latest
+    image: ianthenerd/hubzilla-docker:latest
     depends_on:
       - postgres
       - nginx
@@ -62,7 +62,7 @@ services:
     volumes:
       - volweb:/var/www/html
   cron:
-    image: ungodlyfaded/hubzilla-docker:latest
+    image: ianthenerd/hubzilla-docker:latest
     depends_on:
       - postgres
     command: ["crond", "-f"]

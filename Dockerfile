@@ -1,6 +1,5 @@
 FROM alpine:latest as build
-RUN sed -i 's/dl-cdn.alpinelinux.org/ftp.halifax.rwth-aachen.de/g' /etc/apk/repositories \
-    && apk add bash curl gd php8 php8-curl php8-gd php8-json php8-openssl php8-xml php8-pecl-imagick php8-pgsql php8-mysqli php8-mbstring php8-pecl-mcrypt php8-zip \
+RUN apk add bash curl gd php8 php8-curl php8-gd php8-json php8-openssl php8-xml php8-pecl-imagick php8-pgsql php8-mysqli php8-mbstring php8-pecl-mcrypt php8-zip \
     && apk add git patch \
     && git clone https://framagit.org/hubzilla/core.git /hubzilla
 WORKDIR /hubzilla
@@ -17,8 +16,7 @@ RUN sed 's/,.*//' /tmp/.tags >/hubzilla/version \
     && util/add_addon_repo https://framagit.org/dentm42/dm42-hz-addons.git dm42
 
 FROM php:8.0-fpm-alpine
-RUN sed -i 's/dl-cdn.alpinelinux.org/ftp.halifax.rwth-aachen.de/g' /etc/apk/repositories \
-    && apk --update --no-cache --no-progress add libpng imagemagick-libs libjpeg-turbo rsync ssmtp shadow mysql-client postgresql-client libmcrypt tzdata ssmtp bash git tzdata openldap-clients imagemagick oniguruma libzip \
+RUN apk --update --no-cache --no-progress add libpng imagemagick-libs libjpeg-turbo rsync ssmtp shadow mysql-client postgresql-client libmcrypt tzdata ssmtp bash git tzdata openldap-clients imagemagick oniguruma libzip \
     && apk --update --no-progress add --virtual build-deps autoconf curl-dev freetype-dev build-base  icu-dev libjpeg-turbo-dev imagemagick-dev libldap libmcrypt-dev libpng-dev libtool libxml2-dev openldap-dev postgresql-dev postgresql-libs unzip libmcrypt-dev libxml2-dev openldap-dev oniguruma-dev libzip-dev \
     && docker-php-ext-configure gd --enable-gd --with-jpeg --with-freetype \
     && docker-php-ext-install gd mysqli pgsql zip pdo_mysql pdo_pgsql ldap opcache \

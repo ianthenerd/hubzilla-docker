@@ -1,5 +1,5 @@
 FROM alpine:latest as build
-RUN apk add bash curl gd php82 php82-curl php82-gd php82-json php82-openssl php82-xml php82-pecl-imagick php82-pgsql php82-mysqli php82-mbstring php82-zip \
+RUN apk add bash curl gd php81 php81-curl php81-gd php81-json php81-openssl php81-xml php81-pecl-imagick php81-pgsql php81-mysqli php81-mbstring php81-zip \
     && apk add git patch \
     && git clone https://framagit.org/hubzilla/core.git /hubzilla
 WORKDIR /hubzilla
@@ -15,7 +15,7 @@ RUN sed 's/,.*//' /tmp/.tags >/hubzilla/version \
     && util/add_addon_repo https://framagit.org/hubzilla/addons.git hzaddons \
     && util/add_addon_repo https://framagit.org/dentm42/dm42-hz-addons.git dm42
 
-FROM php:8.2-fpm-alpine
+FROM php:8.1-fpm-alpine
 RUN apk --update --no-cache --no-progress add libpng imagemagick-libs libjpeg-turbo rsync ssmtp shadow mysql-client postgresql-client libmcrypt tzdata ssmtp bash git tzdata openldap-clients imagemagick oniguruma libzip \
     && apk --update --no-progress add --virtual build-deps autoconf curl-dev freetype-dev build-base  icu-dev libjpeg-turbo-dev imagemagick-dev libldap libmcrypt-dev libpng-dev libtool libxml2-dev openldap-dev postgresql-dev postgresql-libs unzip libmcrypt-dev libxml2-dev openldap-dev oniguruma-dev libzip-dev \
     && docker-php-ext-configure gd --enable-gd --with-jpeg --with-freetype \

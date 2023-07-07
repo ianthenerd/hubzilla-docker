@@ -132,7 +132,8 @@ ENDCONF
 				util/config ldapauth ldap_binddn $LDAP_ROOT_DN
 				util/config ldapauth ldap_bindpw $LDAP_ADMIN_PASSWORD
 				util/config ldapauth ldap_searchdn $LDAP_BASE
-				util/config ldapauth ldap_userattr uid
+				util/config ldapauth ldap_userattr $LDAP_USERATTR
+    				util/config ldapauth ldap_group $LDAP_GROUP
 				util/config ldapauth create_account 1;;
 		esac
 	done

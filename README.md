@@ -1,6 +1,6 @@
 # Hubzilla Docker image
 
-This is the packaging of [hubzilla](https://framagit.org/hubzilla/core) as a [docker image](https://hub.docker.com/r/sebt3/hubzilla) based on php:8.0-fpm-alpine in a multi-arch (amd64, arm, arm64) format.
+This is the packaging of [hubzilla](https://framagit.org/hubzilla/core) as a [docker image](https://hub.docker.com/r/sebt3/hubzilla) based on php:8.1-fpm-alpine for amd64.
 
 ## Supported environnement variables:
 
@@ -18,14 +18,17 @@ This is the packaging of [hubzilla](https://framagit.org/hubzilla/core) as a [do
 | SMTP_DOMAIN         | domain.com                        | Mail domain                                                                                                                          |
 | SMTP_PASS           | password                          | Password for the user on the mail server, if set empty, then no authentication on the smtp server will be used                       |
 | HUBZILLA_DOMAIN     | domain.com                        | Web domain name for hubzilla                                                                                                         |
-| HUBZILLA_ADMIN      |                                   | email of this hubzilla administrator (you)                                                                                           |
+| HUBZILLA_ADMIN      |                                   | email address of this hubzilla administrator (you)                                                                                           |
 | REDIS_PATH          |                                   | If set (to something like " tcp://redis") then php sessions will be stored in this redis server (usefull for horizontal scalability) |
-| LDAP_SERVER         |                                   | LDAP serveur name (dont forget to add "ldapauth" to the ADDON_LIST)                                                                  |
-| LDAP_ROOT_DN        |                                   | LDAP username to connect to (ex: cn=admin,dc=domain,dc=com)                                                                          |
+| LDAP_SERVER         |                                   | LDAP server name without ldap:// (dont forget to add "ldapauth" to the ADDON_LIST)                                                                  |
+| LDAP_ROOT_DN        |                                   | LDAP username to connect to (e.g.: cn=admin,dc=domain,dc=com)                                                                          |
 | LDAP_ADMIN_PASSWORD |                                   | Password for that LDAP user                                                                                                          |
-| LDAP_BASE           |                                   | Path to look for users in the directory (ex: ou=people,,dc=domain,dc=com)                                                            |
+| LDAP_BASE           |                                   | Path to look for users in the directory (e.g.: ou=people,,dc=domain,dc=com)                                                            |
+| LDAP_ADMIN_PASSWORD |                                   | Password for that LDAP user                                                                                                          |
+| LDAP_USERATTR |                                   | LDAP user attribute that user accounts will be based on (e.g: sAMAccountName)                                                                                                          |
+| LDAP_GROUP |                                   | LDAP group distinguished name all users must be members of (e.g. CN=Hubzilla Users,CN=Users,DC=domain,DC=com)              |
 | ADDON_LIST          | nsfw superblock diaspora pubcrawl | Addons to activate during initial configuration                                                                                      |
 
 ## Usage
 
-Please see the [install directory](https://github.com/lilfade/hubzilla-docker/tree/master/install) for usage examples.
+Please see the [install directory](https://github.com/ianthenerd/hubzilla-docker/tree/master/install) for usage examples.

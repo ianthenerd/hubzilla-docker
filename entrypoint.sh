@@ -9,7 +9,11 @@ fi
 
 if [ "${1:-"failed"}" != "crond" ];then # Do no configuration for crond
 
+if [ ${SMTP_FROM:-"nope"} != "nope" ];then
+	SMTP_FROM=${SMTP_USER}@${SMTP_DOMAIN}
+	echo "Using SMTP_FROM address $SMTP_FROM"
 
+fi
 
 # Check for database
 CNT=0
@@ -61,7 +65,7 @@ esac
 cat > /etc/ssmtp/ssmtp.conf <<END
 mailhub=${SMTP_HOST}:${SMTP_PORT}
 UseSTARTTLS=${SMTP_USE_STARTTLS}
-root=${SMTP_USER}@${SMTP_DOMAIN}
+root=${SMTP_FROM}
 rewriteDomain=${SMTP_DOMAIN}
 FromLineOverride=YES
 END
@@ -71,8 +75,8 @@ AuthUser=${SMTP_USER}
 AuthPass=${SMTP_PASS}
 END
 fi
-echo "root:${SMTP_USER}@${SMTP_DOMAIN}">/etc/ssmtp/revaliases
-echo "www-data:${SMTP_USER}@${SMTP_DOMAIN}">>/etc/ssmtp/revaliases
+echo "root:${SMTP_FROM}">/etc/ssmtp/revaliases
+echo "www-data:${SMTP_FROM}">>/etc/ssmtp/revaliases
 
 chown -R www-data:www-data "store"
 chown www-data:www-data .
@@ -106,10 +110,10 @@ App::\$config['system']['maximagesize'] = 8000000;
 App::\$config['system']['directory_mode']  = DIRECTORY_MODE_NORMAL;
 App::\$config['system']['theme'] = 'redbasic';
 
-// error_reporting(E_ERROR | E_WARNING | E_PARSE ); 
-// ini_set('error_log','/tmp/php.out'); 
-// ini_set('log_errors','1'); 
-// ini_set('display_errors', '0');
+error_reporting(E_ERROR | E_WARNING | E_PARSE ); 
+ini_set('error_log','/tmp/php.out'); 
+ini_set('log_errors','1'); 
+ini_set('display_errors', '0');
 ENDCONF
 	fi
 	if [ ${REDIS_PATH:-"nope"} != "nope" ];then
